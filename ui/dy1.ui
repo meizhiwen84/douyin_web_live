@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1635</width>
+    <height>729</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>抖音拓客助手</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>19</x>
+     <y>40</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>直播间地址：</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>40</y>
+     <width>321</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startCollect">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>30</y>
+     <width>113</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始采集</string>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="stopCollect">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>30</y>
+     <width>113</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>停止</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="clearData">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>30</y>
+     <width>113</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>清空数据</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exportData">
+   <property name="geometry">
+    <rect>
+     <x>930</x>
+     <y>30</y>
+     <width>113</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>导出数据</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>1091</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>基本设置</string>
+   </property>
+   <widget class="QCheckBox" name="entryRoom_check">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>40</y>
+      <width>87</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>进入</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="comment_check">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>40</y>
+      <width>87</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>发言</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="qr_check">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>40</y>
+      <width>87</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>送礼</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="follower_check">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>40</y>
+      <width>87</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>点赞</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTableWidget" name="datalist">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>170</y>
+     <width>1401</width>
+     <height>511</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Uid</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>账号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>等级</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>昵称</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>蓝V</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>粉丝数</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>关注数</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>获赞数</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>作品数</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>性别</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>个人二维码</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ip归属地</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string> 发言次数</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>发言内容</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="zb_qr">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>171</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>主播二维码</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lookData">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>30</y>
+     <width>113</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查看数据</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

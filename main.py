@@ -1,29 +1,34 @@
-import atexit
-import signal
+import json
+import sys
+import uuid
 
-from browser.manager import init_manager as init_browser_manager
-from output.manager import OutputManager
-from proxy.manager import init_manager as init_proxy_manager
+import requests
+from PyQt5.QtWidgets import QApplication
 
-if __name__ == '__main__':
-    proxy_manager = init_proxy_manager()
-    proxy_manager.start_loop()
-    browser_manager = init_browser_manager()
-    output_manager = OutputManager()
+from CollectWindow import CollectWindow
 
-
-    def terminate(*_):
-        print("terminate")
-        browser_manager.terminate()
-        output_manager.terminate()
-        proxy_manager.terminate()
+# 主线程
+from JihuoWindow import JihuoWindow
 
 
-    atexit.register(terminate)
-    signal.signal(signal.SIGTERM, terminate)
-    signal.signal(signal.SIGINT, terminate)
-    output_manager.start_loop()
-    try:
-        proxy_manager.join()
-    finally:
-        terminate()
+if __name__ == "__main__":
+
+    application = QApplication(sys.argv)
+
+    # 获取本地mac地址，发送请求校验是否经过授权  本地为：da2660bf36f4
+
+    mac = uuid.UUID(int=uuid.getnode()).hex[-12:]
+    print(mac)
+    rs = requests.get(url="http://tk.laobayou.cn/refdgertregfxgfd?macaddress=" + mac)
+    jo = json.loads(rs.content)
+    if jo.get("code") == str(200):
+        window = CollectWindow()
+        window.ui.show()
+
+    else:
+        # 弹出一个激活框
+        jw = JihuoWindow()
+        jw.ui.show()
+        print("未授权")
+
+    application.exec_()

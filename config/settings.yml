@@ -25,9 +25,9 @@ output:
 
 live:
   rooms:
-    - "https://live.douyin.com/86948252600"
+    - "https://live.douyin.com/537835627182"
   users:
-    - ""
+    - "https://www.douyin.com/user/MS4wLjABAAAAVQq_f6QLe8MEg3fY1AFJUE5N6kSRd7aoCXCMS88D74Y"
 
 api:
   userinfo: 'https://live.douyin.com/webcast/user/?aid=6383&target_uid='
