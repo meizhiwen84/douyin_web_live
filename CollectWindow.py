@@ -1,6 +1,7 @@
 import asyncio
 import csv
 import os
+import signal
 import threading
 import time
 from datetime import datetime
@@ -15,6 +16,9 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 # 采集主界面
 # from CollectThread import CollectThread
 # import DouyinSpider as ds
+from collectmain import DyCollectService
+from collectmain import terminate
+
 
 class CollectWindow(QWidget):
 
@@ -56,6 +60,9 @@ class CollectWindow(QWidget):
         self.ui.exportData.setEnabled(True)
 
         # self.new_loop.stop()
+
+        terminate()
+
 
     def clearData(self):
         print("清空")
@@ -137,6 +144,9 @@ class CollectWindow(QWidget):
         self.ui.startCollect.setEnabled(False)
         self.ui.stopCollect.setEnabled(True)
         self.ui.exportData.setEnabled(False)
+
+        self._thread = threading.Thread(target=DyCollectService, args=(self.tableSingal,self.rootUrl))
+        self._thread.start()
 
         # coroutine1=ds.main(self.tableSingal,self.rootUrl)
         # self.new_loop = asyncio.new_event_loop();

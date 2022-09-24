@@ -33,7 +33,8 @@ class OutputManager():
     _thread: "Optional[threading.Thread]"= None
     _should_exit = threading.Event()
 
-    def __init__(self):
+    def __init__(self,tableSingal,rootUrl):
+        self.mainSignal=tableSingal
         _config = config()['output']['use']
         if type(_config) != list:
             _config = [_config]
@@ -65,31 +66,65 @@ class OutputManager():
                     member_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.member_output(member_message)
+
+                        commentlist = [
+                            [3943234, member_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码", "上海", 6,member_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastSocialMessage':
                     social_message = SocialMessage()
                     social_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.social_output(social_message)
+
+                        commentlist = [
+                            [3943234, social_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码","上海", 6, social_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastChatMessage':
                     chat_message = ChatMessage()
                     chat_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.chat_output(chat_message)
+
+                        commentlist = [
+                            [3943234, chat_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
+                             "上海", 6, chat_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastLikeMessage':
                     like_message = LikeMessage()
                     like_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.like_output(like_message)
+
+                        commentlist = [
+                            [3943234, like_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
+                             "上海", 6, like_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastGiftMessage':
                     gift_message = GiftMessage()
                     gift_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.gift_output(gift_message)
+
+                        commentlist = [
+                            [3943234, gift_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
+                             "上海", 6, gift_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastRoomUserSeqMessage':
                     room_user_seq_message = RoomUserSeqMessage()
                     room_user_seq_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.userseq_output(room_user_seq_message)
+
+                        commentlist = [
+                            [3943234, gift_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
+                             "上海", 6, gift_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastControlMessage':
                     control_message = ControlMessage()
                     control_message.set_payload(message.payload)
@@ -100,6 +135,12 @@ class OutputManager():
                     fansclub_message.set_payload(message.payload)
                     for writer in self._writer:
                         writer.fansclub_output(fansclub_message)
+
+                        commentlist = [
+                            [3943234, fansclub_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
+                             "上海", 6, fansclub_message.format_content()]
+                        ]
+                        self.mainSignal.emit(commentlist)
                 else:
                     for writer in self._writer:
                         writer.other_output(message.method, message.payload)
