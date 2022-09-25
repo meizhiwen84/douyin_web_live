@@ -12,8 +12,8 @@ def DyCollectService(tableSingal,rootUrl):
 
     proxy_manager = init_proxy_manager()
     proxy_manager.start_loop()
-    browser_manager = init_browser_manager()
-    output_manager = OutputManager(tableSingal,rootUrl)
+    browser_manager = init_browser_manager(rootUrl)
+    output_manager = OutputManager(tableSingal)
 
     atexit.register(terminate)
 

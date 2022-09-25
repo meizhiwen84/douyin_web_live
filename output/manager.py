@@ -33,7 +33,7 @@ class OutputManager():
     _thread: "Optional[threading.Thread]"= None
     _should_exit = threading.Event()
 
-    def __init__(self,tableSingal,rootUrl):
+    def __init__(self,tableSingal):
         self.mainSignal=tableSingal
         _config = config()['output']['use']
         if type(_config) != list:
@@ -67,8 +67,11 @@ class OutputManager():
                     for writer in self._writer:
                         writer.member_output(member_message)
 
+                        tempUser=member_message.user()
+                        tempContent=member_message.format_content()
+
                         commentlist = [
-                            [3943234, member_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码", "上海", 6,member_message.format_content()]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname, '否', tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13, tempUser.gender,  "上海", 6,tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastSocialMessage':
@@ -77,8 +80,13 @@ class OutputManager():
                     for writer in self._writer:
                         writer.social_output(social_message)
 
+                        tempUser = social_message.user()
+                        tempContent = social_message.format_content()
+
                         commentlist = [
-                            [3943234, social_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码","上海", 6, social_message.format_content()]
+                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname, '否',
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
+                             tempUser.gender,  "上海", 6, tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastChatMessage':
@@ -87,9 +95,13 @@ class OutputManager():
                     for writer in self._writer:
                         writer.chat_output(chat_message)
 
+                        tempUser = chat_message.user()
+                        tempContent = chat_message.format_content()
+
                         commentlist = [
-                            [3943234, chat_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
-                             "上海", 6, chat_message.format_content()]
+                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname, '否',
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
+                             tempUser.gender,  "上海", 6, tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastLikeMessage':
@@ -98,9 +110,13 @@ class OutputManager():
                     for writer in self._writer:
                         writer.like_output(like_message)
 
+                        tempUser = like_message.user()
+                        tempContent = like_message.format_content()
+
                         commentlist = [
-                            [3943234, like_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
-                             "上海", 6, like_message.format_content()]
+                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname, '否',
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
+                             tempUser.gender,  "上海", 6, tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastGiftMessage':
@@ -109,9 +125,13 @@ class OutputManager():
                     for writer in self._writer:
                         writer.gift_output(gift_message)
 
+                        tempUser = gift_message.user()
+                        tempContent = gift_message.format_content()
+
                         commentlist = [
-                            [3943234, gift_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
-                             "上海", 6, gift_message.format_content()]
+                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname, '否',
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
+                             tempUser.gender,  "上海", 6, tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastRoomUserSeqMessage':
@@ -120,9 +140,13 @@ class OutputManager():
                     for writer in self._writer:
                         writer.userseq_output(room_user_seq_message)
 
+                        tempUser = room_user_seq_message.user()
+                        tempContent = room_user_seq_message.format_content()
+
                         commentlist = [
-                            [3943234, gift_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
-                             "上海", 6, gift_message.format_content()]
+                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname, '否',
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
+                             tempUser.gender,  "上海", 6, tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastControlMessage':
@@ -136,9 +160,13 @@ class OutputManager():
                     for writer in self._writer:
                         writer.fansclub_output(fansclub_message)
 
+                        tempUser = fansclub_message.user()
+                        tempContent = fansclub_message.format_content()
+
                         commentlist = [
-                            [3943234, fansclub_message.user().nickname, 2, "天下", '否', 1366, 24, 3002, 13, "男", "点击扫码",
-                             "上海", 6, fansclub_message.format_content()]
+                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname, '否',
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
+                             tempUser.gender,  "上海", 6, tempContent]
                         ]
                         self.mainSignal.emit(commentlist)
                 else:

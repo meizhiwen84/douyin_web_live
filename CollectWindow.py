@@ -10,8 +10,7 @@ import pandas as pd
 
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QWidget, QMessageBox
-
+from PyQt5.QtWidgets import QWidget, QMessageBox, QDesktopWidget
 
 # 采集主界面
 # from CollectThread import CollectThread
@@ -27,10 +26,19 @@ class CollectWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.initUi()
+        self.center()
+
+    def center(self):
+        # 获取屏幕的尺寸信息
+        screen = QDesktopWidget().screenGeometry()
+        # 获取窗口的尺寸信息
+        size = self.geometry()
+        # 将窗口移动到指定位置
+        self.move(int((screen.width() - size.width()) / 2), int((screen.height() - size.height()) / 2))
+
 
     def initUi(self):
         self.ui=uic.loadUi("./ui/dy1.ui")
-
         # # 启动线程
         # self.collectThread=CollectThread(self.tableSingal)
         # self.collectThread.start()
@@ -74,7 +82,7 @@ class CollectWindow(QWidget):
         self.ui.clearData.setEnabled(False)
         print("导出")
         # wb = openpyxl.Workbook()
-        columnHeaders = ["UID","账号","等级","昵称","蓝V","粉丝数","关注数","获赞数","作品数","性别","个人二维码","ip归属地","发言次数","发言内容"]
+        columnHeaders = ["UID","账号","等级","昵称","蓝V","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言次数","发言内容"]
         df = pd.DataFrame(columns=columnHeaders)
         print(df)
 

@@ -19,7 +19,8 @@ class BrowserManager():
         "edge": EdgeDriver
     }
 
-    def __init__(self):
+    def __init__(self,collectUrl):
+        self.collectUrl=collectUrl
         _config = config()["webdriver"]["use"]
         if _config not in self._mapping:
             raise Exception("不支持的浏览器")
@@ -31,7 +32,8 @@ class BrowserManager():
         _users = _live_config.get("users", [])
         if type(_users) is not list:
             _users = [_users]
-        _rooms = _live_config.get("rooms", [])
+        # _rooms = _live_config.get("rooms", [])
+        _rooms=[self.collectUrl]
         if type(_rooms) is not list:
             _rooms = [_rooms]
         for _user in _users:
@@ -89,9 +91,9 @@ class TabInfo(object):
         self.tab_type: str = self.TAB_TYPE_OTHER
 
 
-def init_manager():
+def init_manager(collectUrl):
     global _manager
-    _manager = BrowserManager()
+    _manager = BrowserManager(collectUrl)
     threading.Thread(target=_manager.init_browser).start()
     return _manager
 
