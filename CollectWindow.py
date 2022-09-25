@@ -82,7 +82,7 @@ class CollectWindow(QWidget):
         self.ui.clearData.setEnabled(False)
         print("导出")
         # wb = openpyxl.Workbook()
-        columnHeaders = ["UID","账号","等级","昵称","蓝V","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言次数","发言内容"]
+        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言内容"]
         df = pd.DataFrame(columns=columnHeaders)
         print(df)
 
