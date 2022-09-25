@@ -1,6 +1,9 @@
 import gzip
+import json
 import threading
 from typing import TYPE_CHECKING
+
+import requests
 
 from config.helper import config
 from messages.chat import ChatMessage
@@ -58,6 +61,17 @@ class OutputManager():
             for writer in self._writer:
                 writer.error_output("ParseError", message.body, e)
 
+    def queryUserData(self,uid):
+        userUrl='https://live.douyin.com/webcast/user/?aid=6383&target_uid='+str(uid)
+
+        Headers = {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+        }
+        result = requests.get(url=userUrl, headers=Headers)
+        jo = json.loads(result.content)
+        return (jo.get("data").get("share_qrcode_uri"),jo.get("data").get("sec_uid"))
+
+
     def decode_message(self, message_list: "List[message_pb2.Message]"):
         for message in message_list:
             try:
@@ -68,9 +82,11 @@ class OutputManager():
                         writer.member_output(member_message)
 
                         tempUser=member_message.user()
-                        tempContent=member_message.format_content()
+                        tempContent=member_message.content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
+                        # userData=self.queryUserData(tempUser.id)
+                        # todo meizhiwen secUid是不是可以加到proto文件里面
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
@@ -84,8 +100,10 @@ class OutputManager():
                         writer.social_output(social_message)
 
                         tempUser = social_message.user()
-                        tempContent = social_message.format_content()
+                        tempContent = social_message.commentContent()
                         sexStr="男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
+
+                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
@@ -100,8 +118,10 @@ class OutputManager():
                         writer.chat_output(chat_message)
 
                         tempUser = chat_message.user()
-                        tempContent = chat_message.format_content()
+                        tempContent = chat_message.commentContent()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
+
+                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
@@ -116,8 +136,10 @@ class OutputManager():
                         writer.like_output(like_message)
 
                         tempUser = like_message.user()
-                        tempContent = like_message.format_content()
+                        tempContent = like_message.commentContent()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
+
+                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
@@ -135,6 +157,8 @@ class OutputManager():
                         tempContent = gift_message.format_content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
+                        # userData = self.queryUserData(tempUser.id)
+
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
@@ -150,6 +174,8 @@ class OutputManager():
                         tempUser = room_user_seq_message.user()
                         tempContent = room_user_seq_message.format_content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
+
+                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
@@ -171,6 +197,8 @@ class OutputManager():
                         tempUser = fansclub_message.user()
                         tempContent = fansclub_message.format_content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
+
+                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,

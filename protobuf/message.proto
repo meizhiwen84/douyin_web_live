@@ -321,6 +321,7 @@ message User{
     AnchorInfo anchorInfo = 36;
     int32 linkMicStats = 37;
     string displayId = 38;
+    string secUid=46;
 
     message UserAttr {
 
