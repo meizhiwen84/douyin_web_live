@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1558</width>
+    <width>1643</width>
     <height>802</height>
    </rect>
   </property>
@@ -105,7 +105,7 @@
     <rect>
      <x>20</x>
      <y>80</y>
-     <width>1491</width>
+     <width>1611</width>
      <height>81</height>
     </rect>
    </property>
@@ -168,9 +168,9 @@
   <widget class="QTableWidget" name="datalist">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>280</x>
      <y>160</y>
-     <width>1301</width>
+     <width>1351</width>
      <height>641</height>
     </rect>
    </property>
@@ -229,14 +229,24 @@
      <string>发言内容</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>secuid</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>qrcode</string>
+    </property>
+   </column>
   </widget>
   <widget class="QLabel" name="zb_qr">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>180</y>
-     <width>171</width>
-     <height>181</height>
+     <width>251</width>
+     <height>251</height>
     </rect>
    </property>
    <property name="text">

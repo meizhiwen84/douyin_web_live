@@ -7,6 +7,8 @@ class MemberMessage(Base):
     def __init__(self):
         self.instance = message_pb2.MemberMessage()
 
+    def content(self):
+        return "来了"
 
     def format_content(self):
         template = self.instance.common.displayText.defaultPattern

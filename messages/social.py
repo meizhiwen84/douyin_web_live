@@ -7,6 +7,9 @@ class SocialMessage(Base):
     def __init__(self):
         self.instance = message_pb2.SocialMessage()
 
+    def commentContent(self):
+        return '关注了主播'
+
     def format_content(self):
         return self.user().nickname + ' 关注了主播'
 

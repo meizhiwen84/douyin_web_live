@@ -2,15 +2,18 @@ import asyncio
 import csv
 import os
 import signal
+import ssl
 import threading
 import time
+import urllib
 from datetime import datetime
 
 import pandas as pd
 
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QWidget, QMessageBox, QDesktopWidget
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QWidget, QMessageBox, QDesktopWidget, QHeaderView
 
 # 采集主界面
 # from CollectThread import CollectThread
@@ -18,6 +21,7 @@ from PyQt5.QtWidgets import QWidget, QMessageBox, QDesktopWidget
 from collectmain import DyCollectService
 from collectmain import terminate
 
+ssl._create_default_https_context = ssl._create_unverified_context
 
 class CollectWindow(QWidget):
 
@@ -58,7 +62,36 @@ class CollectWindow(QWidget):
         # 表格给自定义信号绑定事件函数
         self.tableSingal.connect(self.collectCallback)
 
+        self.ui.datalist.itemClicked.connect(self.show_data)
+        self.ui.datalist.setStyleSheet("selection-background-color: red")
+        self.ui.datalist.setSelectionBehavior(self.ui.datalist.SelectRows)
+        self.ui.datalist.setColumnHidden(11, True);
+        self.ui.datalist.setColumnHidden(12, True);
+        self.ui.datalist.setColumnWidth(10,500)
+
         # self.dyScrapy=DyScrapy(self.)
+
+    def show_data(self, Item):
+        try:
+            row = Item.row()  # 获取行数
+            col = Item.column()  # 获取列数 注意是column而不是col哦
+            text = Item.text()  # 获取内容
+            print(row)
+            print(col)
+            print(text)
+
+            tempQrCode=self.ui.datalist.item(row, 12).text()
+            print(tempQrCode)
+
+            # self.ui.zb_qr.setGeometry(0,0,500,210)
+            url = "https://p26.douyinpic.com/obj/"+tempQrCode
+            data = urllib.request.urlopen(url).read()
+            pixmap=QPixmap()
+            pixmap.loadFromData(data)
+            self.ui.zb_qr.setPixmap(pixmap)
+            self.ui.zb_qr.setScaledContents(True)
+        except Exception as e:
+            pass
 
     def stopCollect(self):
         print("停止")
@@ -82,7 +115,7 @@ class CollectWindow(QWidget):
         self.ui.clearData.setEnabled(False)
         print("导出")
         # wb = openpyxl.Workbook()
-        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言内容"]
+        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言内容","secuid","qrcode"]
         df = pd.DataFrame(columns=columnHeaders)
         print(df)
 
