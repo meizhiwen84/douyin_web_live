@@ -51,7 +51,7 @@ class OutputManager():
 
     def decode_payload(self, message: "MessagePayload"):
         try:
-            response = message_pb2.Response()
+            response = message_pb2.Response() #\x08
             wss = wss_pb2.WssResponse()
             wss.ParseFromString(message.body)
             decompressed = gzip.decompress(wss.data)
@@ -90,7 +90,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent]
+                             sexStr, "上海", tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastSocialMessage':
@@ -108,7 +108,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr,  "上海", tempContent]
+                             sexStr,  "上海", tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastChatMessage':
@@ -126,7 +126,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海",  tempContent]
+                             sexStr, "上海",  tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastLikeMessage':
@@ -144,7 +144,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent]
+                             sexStr, "上海", tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastGiftMessage':
@@ -162,7 +162,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent]
+                             sexStr, "上海", tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastRoomUserSeqMessage':
@@ -180,7 +180,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent]
+                             sexStr, "上海", tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastControlMessage':
@@ -203,7 +203,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海",  tempContent]
+                             sexStr, "上海",  tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 else:

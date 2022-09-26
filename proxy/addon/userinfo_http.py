@@ -9,3 +9,4 @@ class UserInfoAddon:
         # /aweme/v1/web/user/profile/other/ 他人主页获取他人信息
         if '/aweme/v1/web/user/profile/other' in flow.request.path:
             content = flow.response.content
+            print(content)

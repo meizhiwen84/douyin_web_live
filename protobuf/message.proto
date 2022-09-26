@@ -322,6 +322,8 @@ message User{
     int32 linkMicStats = 37;
     string displayId = 38;
     string secUid=46;
+    string locationCity=63;
+    string idStr=1028;
 
     message UserAttr {
 

@@ -80,16 +80,16 @@ class CollectWindow(QWidget):
             print(col)
             print(text)
 
-            tempQrCode=self.ui.datalist.item(row, 12).text()
+            tempQrCode=self.ui.datalist.item(row, 11).text()
             print(tempQrCode)
 
             # self.ui.zb_qr.setGeometry(0,0,500,210)
-            url = "https://p26.douyinpic.com/obj/"+tempQrCode
-            data = urllib.request.urlopen(url).read()
-            pixmap=QPixmap()
-            pixmap.loadFromData(data)
-            self.ui.zb_qr.setPixmap(pixmap)
-            self.ui.zb_qr.setScaledContents(True)
+            # url = "https://p26.douyinpic.com/obj/"+tempQrCode
+            # data = urllib.request.urlopen(url).read()
+            # pixmap=QPixmap()
+            # pixmap.loadFromData(data)
+            # self.ui.zb_qr.setPixmap(pixmap)
+            # self.ui.zb_qr.setScaledContents(True)
         except Exception as e:
             pass
 
