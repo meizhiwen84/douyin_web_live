@@ -89,7 +89,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent,tempUser.secUid]
+                             sexStr, "不知道", tempContent,tempUser.secUid,1]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastSocialMessage':
@@ -106,7 +106,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent, tempUser.secUid]
+                             sexStr, "不知道", tempContent, tempUser.secUid,2]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastChatMessage':
@@ -123,7 +123,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent, tempUser.secUid]
+                             sexStr, "不知道", tempContent, tempUser.secUid,3]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastLikeMessage':
@@ -140,7 +140,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent, tempUser.secUid]
+                             sexStr, "不知道", tempContent, tempUser.secUid,4]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastGiftMessage':
@@ -157,7 +157,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent, tempUser.secUid]
+                             sexStr, "不知道", tempContent, tempUser.secUid,5]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastRoomUserSeqMessage':
@@ -174,7 +174,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent, tempUser.secUid]
+                             sexStr, "不知道", tempContent, tempUser.secUid,6]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastControlMessage':
@@ -196,7 +196,7 @@ class OutputManager():
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
                              tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
-                             sexStr, "不知道", tempContent, tempUser.secUid]
+                             sexStr, "不知道", tempContent, tempUser.secUid,7]
                         ]
                         self.mainSignal.emit(commentlist)
                 else:

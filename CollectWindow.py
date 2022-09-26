@@ -71,6 +71,33 @@ class CollectWindow(QWidget):
         self.ui.datalist.setColumnHidden(12, True);
         self.ui.datalist.setColumnWidth(10,500)
 
+        self.ui.entryRoom_check.stateChanged.connect(self.entryRoomSetting)
+        self.ui.comment_check.stateChanged.connect(self.commentSetting)
+        self.ui.like_check.stateChanged.connect(self.likeSetting)
+        self.ui.gift_check.stateChanged.connect(self.giftSetting)
+
+        self.dataType=[1,3,4,5] #进入是1，发言是3 ，送礼是：5，点赞是：4
+
+    def entryRoomSetting(self,statusValue):
+        self.baseSetting(1,statusValue)
+
+    def commentSetting(self,statusValue):
+        self.baseSetting(3,statusValue)
+
+    def likeSetting(self,statusValue):
+        self.baseSetting(4,statusValue)
+
+    def giftSetting(self,statusValue):
+        self.baseSetting(5,statusValue)
+
+    def baseSetting(self,dataType,statusValue):
+        if (dataType in self.dataType):
+            if (statusValue == 0):
+                self.dataType.remove(dataType)
+        else:
+            if (statusValue == 2):
+                self.dataType.append(dataType)
+
     def show_data(self, Item):
         try:
             row = Item.row()  # 获取行数
@@ -171,11 +198,14 @@ class CollectWindow(QWidget):
     def collectCallback(self,data):
         # 将采集到的评论的填充到表格
         for i in range(len(data)):
-            row_count = self.ui.datalist.rowCount()  # 返回当前行数(尾部)
-            self.ui.datalist.insertRow(row_count)  # 尾部插入一行
-            for j in range(0, len(data[i])):
-                self.ui.datalist.setItem(row_count, j , QtWidgets.QTableWidgetItem(str(data[i][j])))
-                self.ui.datalist.scrollToBottom()
+            dt=data[i][12]
+            if(dt in self.dataType):
+                row_count = self.ui.datalist.rowCount()  # 返回当前行数(尾部)
+                self.ui.datalist.insertRow(row_count)  # 尾部插入一行
+                for j in range(0, len(data[i])):
+                    self.ui.datalist.setItem(row_count, j , QtWidgets.QTableWidgetItem(str(data[i][j])))
+                    if(self.ui.autoScroll.isChecked()):
+                        self.ui.datalist.scrollToBottom()
 
 
     def get_loop(self,loop):

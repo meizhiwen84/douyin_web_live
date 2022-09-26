@@ -124,6 +124,9 @@
     <property name="text">
      <string>进入</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="comment_check">
     <property name="geometry">
@@ -137,8 +140,11 @@
     <property name="text">
      <string>发言</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
-   <widget class="QCheckBox" name="qr_check">
+   <widget class="QCheckBox" name="gift_check">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -150,8 +156,11 @@
     <property name="text">
      <string>送礼</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
-   <widget class="QCheckBox" name="follower_check">
+   <widget class="QCheckBox" name="like_check">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -162,6 +171,22 @@
     </property>
     <property name="text">
      <string>点赞</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="autoScroll">
+    <property name="geometry">
+     <rect>
+      <x>1460</x>
+      <y>40</y>
+      <width>87</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>自动滚屏</string>
     </property>
    </widget>
   </widget>
@@ -236,7 +261,7 @@
    </column>
    <column>
     <property name="text">
-     <string>qrcode</string>
+     <string>datatype</string>
     </property>
    </column>
   </widget>
