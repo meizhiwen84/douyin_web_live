@@ -1,5 +1,4 @@
 import atexit
-import signal
 
 from browser.manager import init_manager as init_browser_manager
 from output.manager import OutputManager
@@ -24,7 +23,7 @@ def DyCollectService(tableSingal,rootUrl):
         terminate()
 
 def terminate(*_):
-        print("terminate")
-        browser_manager.terminate()
-        output_manager.terminate()
-        proxy_manager.terminate()
+    print("terminate")
+    browser_manager.terminate()
+    output_manager.terminate()
+    proxy_manager.terminate()

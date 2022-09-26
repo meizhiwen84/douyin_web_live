@@ -61,15 +61,15 @@ class OutputManager():
             for writer in self._writer:
                 writer.error_output("ParseError", message.body, e)
 
-    def queryUserData(self,uid):
-        userUrl='https://live.douyin.com/webcast/user/?aid=6383&target_uid='+str(uid)
-
-        Headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
-        }
-        result = requests.get(url=userUrl, headers=Headers)
-        jo = json.loads(result.content)
-        return (jo.get("data").get("share_qrcode_uri"),jo.get("data").get("sec_uid"))
+    # def queryUserData(self,uid):
+    #     userUrl='https://live.douyin.com/webcast/user/?aid=6383&target_uid='+str(uid)
+    #
+    #     Headers = {
+    #         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"
+    #     }
+    #     result = requests.get(url=userUrl, headers=Headers)
+    #     jo = json.loads(result.content)
+    #     return (jo.get("data").get("share_qrcode_uri"),jo.get("data").get("sec_uid"))
 
 
     def decode_message(self, message_list: "List[message_pb2.Message]"):
@@ -85,12 +85,11 @@ class OutputManager():
                         tempContent=member_message.content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData=self.queryUserData(tempUser.id)
                         # todo meizhiwen secUid是不是可以加到proto文件里面
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent,tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastSocialMessage':
@@ -103,12 +102,11 @@ class OutputManager():
                         tempContent = social_message.commentContent()
                         sexStr="男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr,  "上海", tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent, tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastChatMessage':
@@ -121,12 +119,11 @@ class OutputManager():
                         tempContent = chat_message.commentContent()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海",  tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent, tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastLikeMessage':
@@ -139,12 +136,11 @@ class OutputManager():
                         tempContent = like_message.commentContent()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent, tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastGiftMessage':
@@ -157,12 +153,11 @@ class OutputManager():
                         tempContent = gift_message.format_content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent, tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastRoomUserSeqMessage':
@@ -175,12 +170,11 @@ class OutputManager():
                         tempContent = room_user_seq_message.format_content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海", tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent, tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 elif message.method == 'WebcastControlMessage':
@@ -198,12 +192,11 @@ class OutputManager():
                         tempContent = fansclub_message.format_content()
                         sexStr = "男" if tempUser.gender == 1 else ("女" if tempUser.gender == 2 else "人妖")
 
-                        # userData = self.queryUserData(tempUser.id)
 
                         commentlist = [
-                            [tempUser.id, tempUser.displayId, 2, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 3002, 13,
-                             sexStr, "上海",  tempContent,tempUser.secUid]
+                            [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             sexStr, "不知道", tempContent, tempUser.secUid]
                         ]
                         self.mainSignal.emit(commentlist)
                 else:

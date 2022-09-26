@@ -1,5 +1,6 @@
 import asyncio
 import csv
+import io
 import os
 import signal
 import ssl
@@ -9,6 +10,7 @@ import urllib
 from datetime import datetime
 
 import pandas as pd
+import qrcode as qrcode
 
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import pyqtSignal
@@ -69,8 +71,6 @@ class CollectWindow(QWidget):
         self.ui.datalist.setColumnHidden(12, True);
         self.ui.datalist.setColumnWidth(10,500)
 
-        # self.dyScrapy=DyScrapy(self.)
-
     def show_data(self, Item):
         try:
             row = Item.row()  # 获取行数
@@ -80,16 +80,26 @@ class CollectWindow(QWidget):
             print(col)
             print(text)
 
-            tempQrCode=self.ui.datalist.item(row, 11).text()
-            print(tempQrCode)
+            secUid=self.ui.datalist.item(row, 11).text()
+            print(secUid)
 
-            # self.ui.zb_qr.setGeometry(0,0,500,210)
-            # url = "https://p26.douyinpic.com/obj/"+tempQrCode
-            # data = urllib.request.urlopen(url).read()
-            # pixmap=QPixmap()
-            # pixmap.loadFromData(data)
-            # self.ui.zb_qr.setPixmap(pixmap)
-            # self.ui.zb_qr.setScaledContents(True)
+            qr = qrcode.QRCode(
+                version=2,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=10,
+                border=1
+            )  # 设置二维码的大小
+            qr.add_data("https://www.douyin.com/user/"+secUid)
+            qr.make(fit=True)
+            qr_img = qr.make_image()
+
+            fp = io.BytesIO()
+            qr_img.save(fp, "BMP")
+
+            pixmap=QPixmap()
+            pixmap.loadFromData(fp.getvalue())
+            self.ui.zb_qr.setPixmap(pixmap)
+            self.ui.zb_qr.setScaledContents(True)
         except Exception as e:
             pass
 
@@ -115,7 +125,7 @@ class CollectWindow(QWidget):
         self.ui.clearData.setEnabled(False)
         print("导出")
         # wb = openpyxl.Workbook()
-        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言内容","secuid","qrcode"]
+        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言内容","secuid"]
         df = pd.DataFrame(columns=columnHeaders)
         print(df)
 
@@ -149,7 +159,6 @@ class CollectWindow(QWidget):
             print("等待写文件完成")
             time.sleep(1)
 
-
         QMessageBox.about(self, "消息提示", "导出成功，您可以点击右边->查看数据")
         self.ui.exportData.setEnabled(True)
         self.ui.startCollect.setEnabled(True)
@@ -161,14 +170,12 @@ class CollectWindow(QWidget):
     # 接收子线路采集到的函数发过来的信号通知
     def collectCallback(self,data):
         # 将采集到的评论的填充到表格
-        # data = self.con.selectData('select * from userManagement')
         for i in range(len(data)):
             row_count = self.ui.datalist.rowCount()  # 返回当前行数(尾部)
             self.ui.datalist.insertRow(row_count)  # 尾部插入一行
             for j in range(0, len(data[i])):
                 self.ui.datalist.setItem(row_count, j , QtWidgets.QTableWidgetItem(str(data[i][j])))
                 self.ui.datalist.scrollToBottom()
-                # self.ui.repaint()
 
 
     def get_loop(self,loop):
@@ -188,15 +195,3 @@ class CollectWindow(QWidget):
 
         self._thread = threading.Thread(target=DyCollectService, args=(self.tableSingal,self.rootUrl))
         self._thread.start()
-
-        # coroutine1=ds.main(self.tableSingal,self.rootUrl)
-        # self.new_loop = asyncio.new_event_loop();
-        # t = threading.Thread(target=self.get_loop, args=(self.new_loop,))
-        # t.start()
-        #
-        # asyncio.run_coroutine_threadsafe(coroutine1, self.new_loop)
-        # asyncio.run(coroutine1)
-
-        print(1)
-        # 给采集线程的自定义线程发事件通知
-        # self.collectThread.startCollectSignal.emit(self.rootUrl)
