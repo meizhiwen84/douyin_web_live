@@ -79,7 +79,7 @@ class OutputManager():
                     member_message = MemberMessage()
                     member_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.member_output(member_message)
+                        # writer.member_output(member_message)
 
                         tempUser=member_message.user()
                         tempContent=member_message.content()
@@ -96,7 +96,7 @@ class OutputManager():
                     social_message = SocialMessage()
                     social_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.social_output(social_message)
+                        # writer.social_output(social_message)
 
                         tempUser = social_message.user()
                         tempContent = social_message.commentContent()
@@ -113,7 +113,7 @@ class OutputManager():
                     chat_message = ChatMessage()
                     chat_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.chat_output(chat_message)
+                        # writer.chat_output(chat_message)
 
                         tempUser = chat_message.user()
                         tempContent = chat_message.commentContent()
@@ -130,7 +130,7 @@ class OutputManager():
                     like_message = LikeMessage()
                     like_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.like_output(like_message)
+                        # writer.like_output(like_message)
 
                         tempUser = like_message.user()
                         tempContent = like_message.commentContent()
@@ -147,7 +147,7 @@ class OutputManager():
                     gift_message = GiftMessage()
                     gift_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.gift_output(gift_message)
+                        # writer.gift_output(gift_message)
 
                         tempUser = gift_message.user()
                         tempContent = gift_message.format_content()
@@ -164,7 +164,7 @@ class OutputManager():
                     room_user_seq_message = RoomUserSeqMessage()
                     room_user_seq_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.userseq_output(room_user_seq_message)
+                        # writer.userseq_output(room_user_seq_message)
 
                         tempUser = room_user_seq_message.user()
                         tempContent = room_user_seq_message.format_content()
@@ -186,7 +186,7 @@ class OutputManager():
                     fansclub_message = FansclubMessage()
                     fansclub_message.set_payload(message.payload)
                     for writer in self._writer:
-                        writer.fansclub_output(fansclub_message)
+                        # writer.fansclub_output(fansclub_message)
 
                         tempUser = fansclub_message.user()
                         tempContent = fansclub_message.format_content()

@@ -4,6 +4,7 @@ import io
 import os
 import signal
 import ssl
+import sys
 import threading
 import time
 import urllib
@@ -44,7 +45,8 @@ class CollectWindow(QWidget):
 
 
     def initUi(self):
-        self.ui=uic.loadUi("./ui/dy1.ui")
+        filePath=os.path.join(os.path.dirname(os.path.abspath(os.path.relpath(sys.argv[0]))),"ui","dy1.ui")
+        self.ui=uic.loadUi(filePath)
         # # 启动线程
         # self.collectThread=CollectThread(self.tableSingal)
         # self.collectThread.start()
