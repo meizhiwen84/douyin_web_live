@@ -109,7 +109,7 @@ class CollectWindow(QWidget):
             print(col)
             print(text)
 
-            secUid=self.ui.datalist.item(row, 11).text()
+            secUid=self.ui.datalist.item(row, 9).text()
             print(secUid)
 
             qr = qrcode.QRCode(
