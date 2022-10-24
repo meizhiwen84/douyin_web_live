@@ -16,7 +16,7 @@ class JihuoWindow(QWidget):
         self.initUi()
 
     def initUi(self):
-        filePath=os.path.join(os.path.dirname(os.path.abspath(os.path.relpath(sys.argv[0]))),"ui","dy1.ui")
+        filePath=os.path.join(os.path.dirname(os.path.abspath(os.path.relpath(sys.argv[0]))),"ui","auth.ui")
 
         self.ui = uic.loadUi(filePath)
         self.ui.jihuo_btn.clicked.connect(self.jihuo)
