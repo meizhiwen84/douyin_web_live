@@ -231,16 +231,6 @@
    </column>
    <column>
     <property name="text">
-     <string>获赞数</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>作品数</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
      <string>性别</string>
     </property>
    </column>

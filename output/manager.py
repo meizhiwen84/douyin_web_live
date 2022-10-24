@@ -88,7 +88,7 @@ class OutputManager():
                         # todo meizhiwen secUid是不是可以加到proto文件里面
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent,tempUser.secUid,1]
                         ]
                         self.mainSignal.emit(commentlist)
@@ -105,7 +105,7 @@ class OutputManager():
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent, tempUser.secUid,2]
                         ]
                         self.mainSignal.emit(commentlist)
@@ -122,7 +122,7 @@ class OutputManager():
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent, tempUser.secUid,3]
                         ]
                         self.mainSignal.emit(commentlist)
@@ -139,7 +139,7 @@ class OutputManager():
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent, tempUser.secUid,4]
                         ]
                         self.mainSignal.emit(commentlist)
@@ -156,7 +156,7 @@ class OutputManager():
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent, tempUser.secUid,5]
                         ]
                         self.mainSignal.emit(commentlist)
@@ -173,7 +173,7 @@ class OutputManager():
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent, tempUser.secUid,6]
                         ]
                         self.mainSignal.emit(commentlist)
@@ -195,7 +195,7 @@ class OutputManager():
 
                         commentlist = [
                             [tempUser.id, tempUser.displayId, tempUser.payGrade.level, tempUser.nickname,
-                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount, 0, 0,
+                             tempUser.followInfo.followingCount, tempUser.followInfo.followerCount,
                              sexStr, "不知道", tempContent, tempUser.secUid,7]
                         ]
                         self.mainSignal.emit(commentlist)

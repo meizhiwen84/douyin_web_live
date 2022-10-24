@@ -69,9 +69,9 @@ class CollectWindow(QWidget):
         self.ui.datalist.itemClicked.connect(self.show_data)
         self.ui.datalist.setStyleSheet("selection-background-color: red")
         self.ui.datalist.setSelectionBehavior(self.ui.datalist.SelectRows)
-        self.ui.datalist.setColumnHidden(11, True);
-        self.ui.datalist.setColumnHidden(12, True);
-        self.ui.datalist.setColumnWidth(10,500)
+        self.ui.datalist.setColumnHidden(9, True);
+        self.ui.datalist.setColumnHidden(10, True);
+        self.ui.datalist.setColumnWidth(8,500)
 
         self.ui.entryRoom_check.stateChanged.connect(self.entryRoomSetting)
         self.ui.comment_check.stateChanged.connect(self.commentSetting)
@@ -154,7 +154,7 @@ class CollectWindow(QWidget):
         self.ui.clearData.setEnabled(False)
         print("导出")
         # wb = openpyxl.Workbook()
-        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","获赞数","作品数","性别","ip归属地","发言内容","secuid"]
+        columnHeaders = ["UID","账号","等级","昵称","粉丝数","关注数","性别","ip归属地","发言内容","secuid"]
         df = pd.DataFrame(columns=columnHeaders)
         print(df)
 
@@ -200,7 +200,7 @@ class CollectWindow(QWidget):
     def collectCallback(self,data):
         # 将采集到的评论的填充到表格
         for i in range(len(data)):
-            dt=data[i][12]
+            dt=data[i][10]
             if(dt in self.dataType):
                 row_count = self.ui.datalist.rowCount()  # 返回当前行数(尾部)
                 self.ui.datalist.insertRow(row_count)  # 尾部插入一行
